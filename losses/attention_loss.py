@@ -13,7 +13,7 @@ from scipy.spatial import distance
 import numpy as np
 
 
-__all__ = ['ARViT_Loss','Attention_loss','ARViT_MultiLayer_Loss']
+__all__ = ['ARViT_Loss','Attention_loss','ARViT_MultiLayer_Loss','ARViT_CrossEntropy']
 
 
 class Attention_loss(nn.Module):
@@ -85,4 +85,16 @@ class ARViT_MultiLayer_Loss(nn.Module):
         Lc = classificationLoss + Latt
         #print(Lc)
         return Lc
+    
+class ARViT_CrossEntropy(nn.Module):
+    def __init__(self):
+        super(ARViT_CrossEntropy, self).__init__()
+        self.crossEntropy = nn.CrossEntropyLoss()
+
+    def forward(self, preds, label):
+        #print("Critic Loss")
+        #crossEntropy = nn.CrossEntropyLoss()
+        classificationLoss = self.crossEntropy(preds[0], label)
+        
+        return classificationLoss
     

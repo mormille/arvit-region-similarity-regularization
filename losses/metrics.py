@@ -22,7 +22,7 @@ __all__ = ['Accuracy','AL1','AL2','AL3','AL4','AL5','AL6','Cross_Entropy']
 ######################################################################
 #Parameters
 bias = -0.17
-lambda_metric = 0.01
+lambda_metric = 0.002
 
 c_entropy = nn.CrossEntropyLoss() 
 LCA2 = Attention_loss(bias=bias)
