@@ -75,8 +75,9 @@ def main() -> None:
     assert reduced_attention[0].shape == (batch_size, 256, 256)
     assert raw_attention[0].shape == (batch_size, 256, 256)
     assert gram_distance.shape == (batch_size, 256, 256)
-    assert torch.allclose(gram_distance, gram_distance.transpose(1, 2), atol=1e-5)
     assert torch.isfinite(gram_distance).all()
+    assert float(gram_distance.min()) >= -1e-6
+    assert float(gram_distance.max()) <= 1.0 + 1e-6
 
     loss = ARViT_Loss(layer=0, bias=-0.17, lambda_=0.001)(outputs, labels)
     if not torch.isfinite(loss):
