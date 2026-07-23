@@ -3,14 +3,18 @@
 from __future__ import annotations
 
 import argparse
+import sys
 from pathlib import Path
 
 import torch
 from PIL import Image
 from torchvision import transforms
 
-from ARViT.ARViT import ARViT
-from losses.attention_loss import ARViT_Loss
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from ARViT.ARViT import ARViT  # noqa: E402
+from losses.attention_loss import ARViT_Loss  # noqa: E402
 
 
 def load_batch(use_imagenette: bool, batch_size: int = 2) -> torch.Tensor:
